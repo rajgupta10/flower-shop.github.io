@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            margin-right: 140px;
+            margin-top: 10px;
+        }
+
+        form {
+            max-width: 400px;
+            margin-left: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            margin-left: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        button {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-left: 19px;
+        }
+
+        .cart-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        #selectedProducts {
+            flex: 1;
+            margin-right: 20px;
+        }
+        #paymentSummary {
+            flex: 1;
+        }
+
+        #paymentSummary div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Flowers Shop</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html">Cart</a>
+        <a href="checkout.html">Checkout</a>
+    </nav>
+
+    <section>
+        <!-- Display selected products from the cart on the left -->
+        <div id="paymentSummary">
+            <div>
+                <strong>Total Products:</strong> $<span id="totalProducts">0.00</span>
+            </div>
+            <div>
+                <strong>Delivery Fee:</strong> $<span id="deliveryFee">0.00</span>
+            </div>
+            <div>
+                <strong>GST:</strong> $<span id="gst">0.00</span>
+            </div>
+            <div>
+                <strong>Total Amount:</strong> $<span id="totalAmount">0.00</span>
+            </div>
+        </div>
+        <div id="selectedProducts"></div>
+
+        <!-- Payment form on the right -->
+        <form>
+            <h2>Checkout</h2>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="creditCard">Credit Card Number:</label>
+            <input type="text" id="creditCard" name="creditCard" required>
+
+            <button type="submit">Complete Purchase</button>
+        </form>
+    </section>
+
+    <script>
+        // Retrieve selected products from the cart
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const selectedProductsHtml = cartItems.map(item => `
+            <div class="cart-item">
+                <h3>${item.name}</h3>
+                <p>Price: $${item.price}</p>
+                <p>Quantity: ${item.quantity}</p>
+            </div>
+        `).join('');
+
+        document.getElementById('selectedProducts').innerHTML = `<h3>Selected Products:</h3>${selectedProductsHtml}`;
+
+        // Calculate and display payment summary
+        const totalProducts = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const deliveryFee = 5.00; // Change this according to your business logic
+        const gst = 0.1 * totalProducts; // Assuming GST is 10%
+        const totalAmount = totalProducts + deliveryFee + gst;
+
+        document.getElementById('totalProducts').innerText = totalProducts.toFixed(2);
+        document.getElementById('deliveryFee').innerText = deliveryFee.toFixed(2);
+        document.getElementById('gst').innerText = gst.toFixed(2);
+        document.getElementById('totalAmount').innerText = totalAmount.toFixed(2);
+    </script>
+</body>
+</html>

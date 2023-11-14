@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Flowers Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .product-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Flowers Shop</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html">Cart</a>
+        <a href="checkout.html">Checkout</a>
+    </nav>
+
+    <section>
+        <!-- Content of the respective page will go here -->
+    </section>
+
+    <!-- Script for Home Page -->
+    <script>
+        // Your Home Page Script
+        console.log('Home Page Script');
+
+        // Sample Content
+        document.querySelector('section').innerHTML = '<h2>Welcome to our Home Page</h2><p>This is the home page content.</p>';
+    </script>
+
+    <!-- Script for Product Page -->
+    <script>
+        // Your Product Page Script
+        console.log('Product Page Script');
+
+        // Sample Content
+        const products = [
+            { name: 'Product 1', price: 19.99 },
+            { name: 'Product 2', price: 29.99 },
+            { name: 'Product 3', price: 39.99 }
+        ];
+
+        const productHtml = products.map(product => `
+            <div class="product-item">
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price}</p>
+                <button>Add to Cart</button>
+            </div>
+        `).join('');
+
+        document.querySelector('section').innerHTML = `<h2>Our Products</h2>${productHtml}`;
+    </script>
+
+    <!-- Script for Cart Page -->
+    <script>
+        // Your Cart Page Script
+        console.log('Cart Page Script');
+
+        // Sample Content
+        const cartItems = [
+            { name: 'Product 1', price: 19.99, quantity: 2 },
+            { name: 'Product 3', price: 39.99, quantity: 1 }
+        ];
+
+        const cartHtml = cartItems.map(item => `
+            <div class="product-item">
+                <h3>${item.name}</h3>
+                <p>Price: $${item.price}</p>
+                <p>Quantity: ${item.quantity}</p>
+                <button>Remove from Cart</button>
+            </div>
+        `).join('');
+
+        document.querySelector('section').innerHTML = `<h2>Your Cart</h2>${cartHtml}`;
+    </script>
+
+    <!-- Script for Checkout Page -->
+    <script>
+        console.log('Home Page Script');
+        document.querySelector('section').innerHTML = '<h2>Welcome to our Home Page</h2><p>This is the home page content.</p>';
+    </script>
+</body>
+</html>
